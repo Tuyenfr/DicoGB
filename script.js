@@ -1,5 +1,3 @@
-alert("bien lié")
-
 /* MON PROGRAMME : donner la définition d'un mot anglais
 
 1) Récupérer le mot saisi
@@ -10,4 +8,10 @@ alert("bien lié")
 
 //ETAPE 1 : RECUPERER MON MOT
 
-const form =
+const form = document.querySelector("#form")
+form.addEventListener("submit", (event) => {
+  event.preventDefault() // annule le comportement par défaut à savoir rediriger la donnée du formulaire, du coup garde le mot sur la page au lieu de l'effacer
+  const data = new FormData(form) // mettre name="search" et value="" dans l'input du fichier index.html
+  const search = data.get("search")
+  console.log(search)
+})
