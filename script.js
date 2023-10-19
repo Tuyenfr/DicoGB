@@ -99,19 +99,17 @@ const renderToHTML = (data) => {
     const partOfSpeech = meaning.partOfSpeech
     const definition = meaning.definitions[0].definition
     
-    /* 
-    1 - Avec un innerHTML
     list.innerHTML += `
     <li class="flex">
       <p class="partOfSpeech">${partOfSpeech}</p>
       <p class="definition">${definition}</p>
     </li>`
 
-    2- Avec la création d'éléments
+    
+  /*    1 - Avec un innerHTML :
+    2- Avec la création d'éléments : voir ci-dessous
     */
 
-  
-    
   
   }
 }
