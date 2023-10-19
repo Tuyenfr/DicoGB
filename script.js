@@ -27,17 +27,70 @@ form.addEventListener("submit", (event) => {
 
 const apiCall = (word) => {
   console.log("wordToSearch :", word)
-  fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`) // Pour concaténer string + interpolation utiliser les ``)
+  fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`) // Pour concaténer une string + une interpolation utiliser les ``)
     .then((Response) => Response.json())
     .then((data) => {
 
       // ETAPE 3 : récupérer la donnée
-      console.log(data)
-      const wordInformation = data[0]
-      console.log("Mot : ", wordInformation.word)
+      
+      //const wordInformations = data[0]
+      //console.log(wordInformations)
+      // console.log("Mot : ", wordInformation.word) // Attention : ce "word" est le premier élément renvoyé par l'API
+      //console.log("Mot:", wordInformations) // // permet de voir dans la console les données du mot saisi
+
+      const informationsNeeded = extractData(data[0])
+      renderToHTML(informationsNeeded)
+
+    })
+    .catch((error) => {
+      alert("le mot n'existe pas")
+      console.error(error)
     })
 }
 
+const extractData = (data) => {
+
+      //1. Mot
+      const word = data.word
+        
+      //2. Ecriture phonétique
+      const phonetic = findProp(data.phonetics, "text") // voir fonction findProp ci-dessous
+      //console.log("phonetic trouvée:",phonetic)
+
+      //3. Prononciation
+      const pronun = findProp(data.phonetics, "audio") // voir fonction findProp ci-dessous
+      //console.log("pronoun :", pronun)
+
+      //4. Définitions
+      const meanings = data.meanings
+      //console.log("meaning :",meanings)
+
+      return {
+        word: word,
+        phonetic: phonetic,
+        pronun: pronun,
+        meanings: meanings
+      }
+
+}
+
+const findProp = (array, name) => {
+  //La fonction parcourt un tableau d'objets et cherche si l'objet en cours contient une certaine propriété
+  //alors elle renvoit cette propriété
+  for (let i = 0; i < array.length; i++) {
+    const currentObject = array[i]
+    const hasProp = currentObject.hasOwnProperty(name)
+    console.log("Value to return :", currentObject[name])
+    //if (hasProp) console.log("props :", hasProp)
+    if (hasProp) return currentObject[name]
+
+  }
+}
+
+// ETAPE 4 : Afficher les informations sur la page HTML
+const renderToHTML = () => {
+
+}
 
 //LANCEMENT DU PROGRAMME
 watchSubmit()
