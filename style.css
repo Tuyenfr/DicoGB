@@ -8,8 +8,8 @@ body {
   background-color: rgba(193, 208, 235, 0.827);
   margin-left: 15%;
   margin-right: 15%;
-  height: 560px;
-  padding-top: 100px;
+  height: 610px;
+  padding-top: 50px;
   margin-top: 20px;
 }
 
@@ -40,11 +40,10 @@ p {
   display: block;
   justify-content: center;
   height: fit-content;
-  width: 457px;
+  width: 500px;
   margin-right: auto;
   margin-left: auto;
   border-radius: 5px;
-  box-shadow: 1px 1px 2px 10px rgb(226, 226, 226);
 }
 
 .line-text {
@@ -68,7 +67,7 @@ p {
 }
 
 .line-output {
-  height: 30px;
+  height: 50px;
   background-color: blanchedalmond;
   color: rgb(92, 88, 88);
   border: solid;
@@ -84,6 +83,7 @@ img {
   height: 100%;
 }
 
+/* RETIRER LE CADRE NOIR AUTOUR DU CHAMP DE SAISI */
 input[type="text"]:focus {
 	outline:none;
 }
@@ -96,4 +96,41 @@ footer {
   margin-left: 15%;
   margin-right: 15%;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+ul { 
+  background-color: blanchedalmond;
+  border: solid;
+  border-color: white;
+}
+
+li {
+  height: 50px;
+  list-style-type: none;
+  margin-left: -44.5px;
+  margin-right: -5px;
+  background-color:  blanchedalmond;
+  text-align: left;
+  border: solid;
+  border-color: white;
+}
+
+.flex {
+  display: flex;
+}
+
+.partOfSpeech {
+  width: 20%;
+  color: black;
+  font-weight: 100;
+  background-color:  blanchedalmond;
+  text-align: left;
+}
+
+.definition {
+  width: 80%;
+  color: black;
+  font-weight: 200;
+  background-color:  blanchedalmond;
+  text-align: left;
 }

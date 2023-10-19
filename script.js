@@ -26,7 +26,7 @@ form.addEventListener("submit", (event) => {
 // ETAPE 2 : Envoyer le mot à l'API (requête Fetch asynchrone avec then)
 
 const apiCall = (word) => {
-  console.log("wordToSearch :", word)
+  //console.log("wordToSearch :", word)
   fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`) // Pour concaténer une string + une interpolation utiliser les ``)
     .then((Response) => Response.json())
     .then((data) => {
@@ -43,7 +43,7 @@ const apiCall = (word) => {
 
     })
     .catch((error) => {
-      alert("le mot n'existe pas")
+      alert("Le mot demandé n'existe pas")
       console.error(error)
     })
 }
@@ -88,8 +88,32 @@ const findProp = (array, name) => {
 }
 
 // ETAPE 4 : Afficher les informations sur la page HTML
-const renderToHTML = () => {
+const renderToHTML = (data) => {
+  const title = document.querySelector(".js-card-title")
+  title.textContent = data.word
+  const phonetic = document.querySelector(".js-card-phonetic")
+  phonetic.textContent = data.phonetic
+  const list = document.querySelector(".js-card-list")
+  for(let i = 0; i < data.meanings.length; i++) {
+    const meaning = data.meanings[i]
+    const partOfSpeech = meaning.partOfSpeech
+    const definition = meaning.definitions[0].definition
+    
+    /* 
+    1 - Avec un innerHTML
+    list.innerHTML += `
+    <li class="flex">
+      <p class="partOfSpeech">${partOfSpeech}</p>
+      <p class="definition">${definition}</p>
+    </li>`
 
+    2- Avec la création d'éléments
+    */
+
+  
+    
+  
+  }
 }
 
 //LANCEMENT DU PROGRAMME
