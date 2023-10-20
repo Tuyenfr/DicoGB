@@ -140,10 +140,10 @@ const renderToHTML = (data) => {
     audio.play()
   })
   audio.addEventListener('ended', () => {
-    button.classList.remove("display-none")
     button.classList.add("display-none")
+    button.classList.remove("display-none")
 
-
+  
   })
 
 }

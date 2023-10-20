@@ -12,22 +12,34 @@
   <div class="flux">
 
     <section class="container1">
-    <p>Cas pratique Javascript - API</p>
-    <p>Dico anglais</p>
+      <p class="title">Dico anglais</p>
+      <p class="flag"><img class="img-flag" src="flag-GB.png" alt="drapeau anglais"></p>
     </section>
 
     <section class="container2">
       
+      <div>
       <form class="flex" id="form">
           <input class="line-text" type="text" size="63" placeholder="Saisissez un mot anglais" name="search" value="">
-          <button class="line-button" type="submit"><img src="loupe-freepik.png"></button>
+          <button class="line-button" type="submit"><img src="loupe-freepik.png" alt="loupe"></button>
       </form>
+      </div>
 
-      <div class="line-output js-card-title"></div>
-      <div class="line-output js-card-phonetic"></div>
-      <div class="line-output"></div>
+      <div class="card-hidden js-card-hidden">
+      <div class="flex line-output">
+        <div class="partOfSpeech">word</div>
+        <div class="definition js-card-title"></div>
+      </div>
+
+      <div class="flex line-output">
+        <div class="partOfSpeech audio-w1">phonetic</div>
+        <div class="definition js-card-phonetic audio-w2"></div>
+        <div class="audio-w3 js-card-button display-none"><img class="img-ecoute" src="lecoute-clandestine-bleu.png"></div>
+      </div>
+
       <ul class="js-card-list">
       </ul>
+    </div>
     </section>
 
 
