@@ -16,6 +16,10 @@ const form = document.querySelector("#form") // définition de l'étape 1 mais o
 
 form.addEventListener("submit", (event) => {
   event.preventDefault() // annule le comportement par défaut à savoir rediriger la donnée du formulaire, du coup garde le mot sur la page au lieu de l'effacer
+  
+  const card = document.querySelector(".js-card-hidden")
+  card.classList.remove("card-hidden")
+
   const data = new FormData(form) // mettre name="search" et value="" dans l'input du fichier index.html
   const wordToSearch = data.get("search")
   apiCall(wordToSearch) // lancer le fetch de l'étape 2 définie après
@@ -94,24 +98,54 @@ const renderToHTML = (data) => {
   const phonetic = document.querySelector(".js-card-phonetic")
   phonetic.textContent = data.phonetic
   const list = document.querySelector(".js-card-list")
+  list.innerHTML = "" // PERMET DE NETTOYER LA LISTE DE LA REQUETE PRECEDENTE (PERMET DE TOUT VIDER avant d'AFFICHER LA NOUVELLE REQUETE)
   for(let i = 0; i < data.meanings.length; i++) {
     const meaning = data.meanings[i]
     const partOfSpeech = meaning.partOfSpeech
     const definition = meaning.definitions[0].definition
     
+    /*1 - Avec un innerHTML : la lisibilité peut être mauvaise qd on a de gros blocs
+
     list.innerHTML += `
     <li class="flex">
       <p class="partOfSpeech">${partOfSpeech}</p>
       <p class="definition">${definition}</p>
     </li>`
 
-    
-  /*    1 - Avec un innerHTML :
-    2- Avec la création d'éléments : voir ci-dessous
+      2- Avec la création d'éléments : voir ci-dessous
     */
 
-  
+      const li = document.createElement('li')
+      li.classList.add("flex")
+      const pPartOfSpeech = document.createElement('p')
+      pPartOfSpeech.textContent = partOfSpeech
+      pPartOfSpeech.classList.add("partOfSpeech")
+      const pDefinition = document.createElement('p')
+      pDefinition.textContent = definition
+      pDefinition.classList.add("definition")
+
+      li.appendChild(pPartOfSpeech)
+      li.appendChild(pDefinition)
+      list.appendChild(li)
   }
+
+// ETAPE 5 : RAJOUT DE L'AUDIO
+
+  const button = document.querySelector('.js-card-button')
+  button.classList.remove("display-none")
+  const audio = new Audio(data.pronun)
+  button.addEventListener('click', () => {
+  button.classList.add("display-none")
+  button.classList.remove("display-none")
+    audio.play()
+  })
+  audio.addEventListener('ended', () => {
+    button.classList.remove("display-none")
+    button.classList.add("display-none")
+
+
+  })
+
 }
 
 //LANCEMENT DU PROGRAMME
