@@ -9,7 +9,7 @@ body {
   margin-left: 15%;
   margin-right: 15%;
   height: 580px;
-  padding-top: 80px;
+  padding-top: 70px;
   margin-top: 20px;
 }
 
@@ -104,6 +104,11 @@ body {
   width: 15%;
   border-bottom-right-radius: 5px;
   border-top-right-radius: 5px;
+}
+
+::line-text.selection {
+  background-color: blanchedalmond;
+
 }
 
 ::placeholder {
@@ -216,6 +221,19 @@ li {
 .border-list {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
+}
+
+.refresh {
+  height: 40px;
+  width: 40px;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+.img-refresh {
+  width: 100%;
+  height: 100%;
 }
 
 /* FOOTER */

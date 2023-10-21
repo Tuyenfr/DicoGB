@@ -7,6 +7,7 @@
 5) Ajouter un lecteur pour écouter la prononciation du mot */
 
 let wordToSearch = ""
+const audioEmpty = new Audio ("")
 
 //ETAPE 1 : RECUPERER MON MOT
 
@@ -16,7 +17,6 @@ const form = document.querySelector("#form") // définition de l'étape 1 mais o
 
 form.addEventListener("submit", (event) => {
   event.preventDefault() // annule le comportement par défaut à savoir rediriger la donnée du formulaire, du coup garde le mot sur la page au lieu de l'effacer
-  
   const data = new FormData(form) // mettre name="search" et value="" dans l'input du fichier index.html
   const wordToSearch = data.get("search")
   apiCall(wordToSearch) // lancer le fetch de l'étape 2 définie après
@@ -141,20 +141,25 @@ const renderToHTML = (data) => {
 
   const button = document.querySelector('.js-card-button')
   button.classList.remove("display-none")
-  const audio = new Audio(data.pronun)
+  let audio = new Audio(data.pronun)
   button.addEventListener('click', () => {
   button.classList.add("display-none")
   button.classList.remove("display-none")
     audio.play()
-  })
-  audio.addEventListener('ended', () => {
-    button.classList.add("display-none")
-    button.classList.remove("display-none")
 
-  
+  })
+
+  audio.addEventListener('ended', () => {
+      //audio = new Audio("")
   })
 
 }
 
 //LANCEMENT DU PROGRAMME
 watchSubmit()
+
+const refresh = document.querySelector(".js-refresh")
+refresh.addEventListener("click", () => {
+  location.reload()
+})
+
