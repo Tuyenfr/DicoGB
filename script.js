@@ -139,13 +139,30 @@ const renderToHTML = (data) => {
 
 // ETAPE 5 : RAJOUT DE L'AUDIO
 
-  const button = document.querySelector('.js-card-button')
-  button.classList.remove("display-none")
+  const buttonOn = document.querySelector('.js-card-button-on')
+  const buttonOff = document.querySelector('.js-card-button-off')
+  buttonOn.classList.remove("display-none")
   let audio = new Audio(data.pronun)
-  button.addEventListener('click', () => {
-  button.classList.add("display-none")
-  button.classList.remove("display-none")
+  buttonOn.addEventListener('click', () => {
+  buttonOn.classList.add("display-none")
+  buttonOff.classList.remove("display-none")
     audio.play()
+  })
+
+  buttonOff.addEventListener("click", () => {
+    buttonOn.classList.remove("display-none")
+    buttonOff.classList.add("display-none")
+    audio = new Audio("")
+
+    buttonOn.classList.add("display-none")
+    buttonOff.classList.remove("display-none")
+
+    let audio = new Audio(data.pronun)
+    buttonOn.addEventListener('click', () => {
+    buttonOn.classList.remove("display-none")
+    buttonOff.classList.add("display-none")
+      audio.play()
+    })
 
   })
 
