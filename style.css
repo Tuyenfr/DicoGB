@@ -72,6 +72,15 @@ body {
   display: none;
 }
 
+.display-dialog {
+  display: none;
+}
+
+.form-dialog {
+  display: flex;
+  justify-content: center;
+}
+
 .line-text {
   height: 50px;
   background-color: blanchedalmond;
@@ -80,7 +89,7 @@ body {
   border-color: white;
   border-right: none;
   width: 90%;
-  font-size: large;
+  font-size: 18px;
   padding-left: 5px;
 }
 
@@ -95,7 +104,7 @@ body {
 }
 
 ::placeholder {
-  font-size: small;
+  font-size: 15px;
 }
 
 .line-output {

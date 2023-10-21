@@ -17,9 +17,6 @@ const form = document.querySelector("#form") // définition de l'étape 1 mais o
 form.addEventListener("submit", (event) => {
   event.preventDefault() // annule le comportement par défaut à savoir rediriger la donnée du formulaire, du coup garde le mot sur la page au lieu de l'effacer
   
-  const card = document.querySelector(".js-card-hidden")
-  card.classList.remove("card-hidden")
-
   const data = new FormData(form) // mettre name="search" et value="" dans l'input du fichier index.html
   const wordToSearch = data.get("search")
   apiCall(wordToSearch) // lancer le fetch de l'étape 2 définie après
@@ -43,13 +40,24 @@ const apiCall = (word) => {
       //console.log("Mot:", wordInformations) // // permet de voir dans la console les données du mot saisi
 
       const informationsNeeded = extractData(data[0])
+
+      const card = document.querySelector(".js-card-hidden")
+      card.classList.remove("card-hidden")
+
       renderToHTML(informationsNeeded)
 
     })
     .catch((error) => {
-      alert("Le mot demandé n'existe pas")
+      const notFound = document.querySelector(".js-dialog")
+      notFound.classList.remove("display-dialog")
+      const buttonDialog = document.querySelector(".js-button-dialog")
+      buttonDialog.addEventListener("click", () => {
+        location.reload()
+      })
       console.error(error)
-    })
+      })
+
+    
 }
 
 const extractData = (data) => {
