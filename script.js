@@ -7,7 +7,7 @@
 5) Ajouter un lecteur pour écouter la prononciation du mot */
 
 let wordToSearch = ""
-const audioEmpty = new Audio ("")
+const audioEmpty = new Audio("")
 
 //ETAPE 1 : RECUPERER MON MOT
 
@@ -17,6 +17,12 @@ const form = document.querySelector("#form") // définition de l'étape 1 mais o
 
 form.addEventListener("submit", (event) => {
   event.preventDefault() // annule le comportement par défaut à savoir rediriger la donnée du formulaire, du coup garde le mot sur la page au lieu de l'effacer
+  
+  const buttonOn = document.querySelector('.js-card-button-on')
+  const buttonOff = document.querySelector('.js-card-button-off')
+    buttonOn.classList.remove("display-none")
+    buttonOff.classList.add("display-none")
+    
   const data = new FormData(form) // mettre name="search" et value="" dans l'input du fichier index.html
   const wordToSearch = data.get("search")
   apiCall(wordToSearch) // lancer le fetch de l'étape 2 définie après
@@ -28,6 +34,7 @@ form.addEventListener("submit", (event) => {
 
 const apiCall = (word) => {
   //console.log("wordToSearch :", word)
+
   fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`) // Pour concaténer une string + une interpolation utiliser les ``)
     .then((Response) => Response.json())
     .then((data) => {
@@ -141,33 +148,23 @@ const renderToHTML = (data) => {
 
   const buttonOn = document.querySelector('.js-card-button-on')
   const buttonOff = document.querySelector('.js-card-button-off')
-  buttonOn.classList.remove("display-none")
+
   let audio = new Audio(data.pronun)
   buttonOn.addEventListener('click', () => {
   buttonOn.classList.add("display-none")
   buttonOff.classList.remove("display-none")
     audio.play()
+
   })
 
   buttonOff.addEventListener("click", () => {
     buttonOn.classList.remove("display-none")
     buttonOff.classList.add("display-none")
-    audio = new Audio("")
 
-    buttonOn.classList.add("display-none")
-    buttonOff.classList.remove("display-none")
-
-    let audio = new Audio(data.pronun)
-    buttonOn.addEventListener('click', () => {
-    buttonOn.classList.remove("display-none")
-    buttonOff.classList.add("display-none")
-      audio.play()
     })
 
-  })
-
   audio.addEventListener('ended', () => {
-      //audio = new Audio("")
+
   })
 
 }
