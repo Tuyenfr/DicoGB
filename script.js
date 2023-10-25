@@ -7,9 +7,9 @@
 5) Ajouter un lecteur pour écouter la prononciation du mot */
 
 let wordToSearch = ""
-const audioEmpty = new Audio("")
 
 //ETAPE 1 : RECUPERER MON MOT
+
 
 const watchSubmit = () => {
 
@@ -20,15 +20,18 @@ form.addEventListener("submit", (event) => {
   
   const buttonOn = document.querySelector('.js-card-button-on')
   const buttonOff = document.querySelector('.js-card-button-off')
-    buttonOn.classList.remove("display-none")
-    buttonOff.classList.add("display-none")
-    
+    buttonOn.classList.remove("display-none") // Ré-initialise le comportement par défaut au cas où un mot serait soumis sans rafraîchissement de la page
+    buttonOff.classList.add("display-none") // Ré-initialise le comportement par défaut au cas où un mot serait soumis sans rafraîchissement de la page
+  
   const data = new FormData(form) // mettre name="search" et value="" dans l'input du fichier index.html
   const wordToSearch = data.get("search")
   apiCall(wordToSearch) // lancer le fetch de l'étape 2 définie après
 
+
 })
+
 }
+
 
 // ETAPE 2 : Envoyer le mot à l'API (requête Fetch asynchrone avec then)
 
@@ -52,6 +55,8 @@ const apiCall = (word) => {
       card.classList.remove("card-hidden")
 
       renderToHTML(informationsNeeded)
+
+
 
     })
     .catch((error) => {
@@ -161,16 +166,18 @@ const renderToHTML = (data) => {
     buttonOn.classList.remove("display-none")
     buttonOff.classList.add("display-none")
 
+    audio.addEventListener('ended', () => {
+      audio = new Audio("")
+      audio.play()
     })
 
-  audio.addEventListener('ended', () => {
-
-  })
+    })
 
 }
 
 //LANCEMENT DU PROGRAMME
 watchSubmit()
+
 
 const refresh = document.querySelector(".js-refresh")
 refresh.addEventListener("click", () => {
